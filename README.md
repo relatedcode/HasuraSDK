@@ -1,0 +1,2 @@
+# HasuraSDK
+Unofficial Hasura SDK
