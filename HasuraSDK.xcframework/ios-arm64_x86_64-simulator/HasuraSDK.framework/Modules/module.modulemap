@@ -1,0 +1,11 @@
+framework module HasuraSDK {
+  umbrella header "HasuraSDK.h"
+
+  export *
+  module * { export * }
+}
+
+module HasuraSDK.Swift {
+    header "HasuraSDK-Swift.h"
+    requires objc
+}

@@ -1,0 +1,78 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.62 clang-1316.0.20.8)
+// swift-module-flags: -target arm64-apple-ios15.4-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name HasuraSDK
+import Foundation
+@_exported import HasuraSDK
+import Network
+import Swift
+import _Concurrency
+public enum HSDebugLevel {
+  case none
+  case error
+  case all
+  public static func == (a: HasuraSDK.HSDebugLevel, b: HasuraSDK.HSDebugLevel) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@objc @_inheritsConvenienceInitializers public class HSDebug : ObjectiveC.NSObject {
+  public class func level(_ debugLevel: HasuraSDK.HSDebugLevel)
+  @objc override dynamic public init()
+  @objc deinit
+}
+public typealias HSErrorCallback = (Swift.Error?) -> Swift.Void
+public typealias HSResultCallback = ([Swift.String : Any], Swift.Error?) -> Swift.Void
+@objc public class HServer : ObjectiveC.NSObject {
+  public init(link linkHasura: Swift.String, secret: Swift.String, wsprotocol: Swift.String? = nil)
+  @objc deinit
+  public func connect(_ callback: @escaping HasuraSDK.HSErrorCallback)
+  public func disconnect()
+  public func send(_ query: Swift.String, _ variables: [Swift.String : Any], _ callback: @escaping HasuraSDK.HSResultCallback)
+  public func query(_ query: Swift.String, _ variables: [Swift.String : Any], _ callback: @escaping HasuraSDK.HSResultCallback)
+  public func mutation(_ query: Swift.String, _ variables: [Swift.String : Any], _ callback: @escaping HasuraSDK.HSResultCallback)
+  public func subscription(_ query: Swift.String, _ variables: [Swift.String : Any], _ callback: @escaping HasuraSDK.HSResultCallback) -> Swift.String
+  public func subscription(cancel callbackId: Swift.String, _ callback: @escaping HasuraSDK.HSErrorCallback)
+}
+public enum HSQueryFormat {
+  case original
+  case escaped
+  public static func == (a: HasuraSDK.HSQueryFormat, b: HasuraSDK.HSQueryFormat) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class HSQuery : ObjectiveC.NSObject {
+  public class subscript(name: Swift.String, format: HasuraSDK.HSQueryFormat = .original) -> Swift.String {
+    get
+  }
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class HSNetwork : ObjectiveC.NSObject {
+  public class func setup()
+  public class func notReachable() -> Swift.Bool
+  public class func isReachable() -> Swift.Bool
+  public class func isCellular() -> Swift.Bool
+  public class func isWiFi() -> Swift.Bool
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class HSDate : ObjectiveC.NSObject {
+  public class func custom(_ formatter: Foundation.DateFormatter)
+  @objc deinit
+}
+extension HasuraSDK.HSDate {
+  public class subscript(string: Swift.String) -> Foundation.Date {
+    get
+  }
+  public class subscript(date: Foundation.Date) -> Swift.String {
+    get
+  }
+  public class subscript(timestamp: Foundation.TimeInterval) -> Swift.String {
+    get
+  }
+}
+extension HasuraSDK.HSDebugLevel : Swift.Equatable {}
+extension HasuraSDK.HSDebugLevel : Swift.Hashable {}
+extension HasuraSDK.HSQueryFormat : Swift.Equatable {}
+extension HasuraSDK.HSQueryFormat : Swift.Hashable {}
